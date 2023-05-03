@@ -1,10 +1,10 @@
 <!-- CloudinaryWidget.vue -->
 
 <template>
-  <div class="flex justify-center">
+  <!-- <div class="flex justify-center">
     <button
       @click="openCloudinaryWidget"
-      class="bg-[#1865ac] uppercase font-semibold rounded-full px-3 py-2 hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-75 my-6"
+      class="bg-[#1865ac] uppercase font-semibold rounded-full px-3 py-2 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-75 my-6"
     >
       Upload Assets
     </button>
@@ -15,9 +15,37 @@
       Uploaded Assets
       <div class="bg-[#1865ac] w-full h-1 rounded mt-1"></div>
     </h3>
+  </div> -->
+
+  <div>
+    <div class="flex flex-col items-center min-h-screen bg-neutral-900">
+      <button
+        @click="openCloudinaryWidget"
+        class="bg-blue-500 text-white py-2 px-4 rounded mt-8"
+      >
+        Upload Image
+      </button>
+      <div v-if="uploadedAssets.length > 0" class="mt-8 w-full">
+        <h3 class="text-white text-center">Uploaded Assets:</h3>
+        <div class="flex flex-wrap justify-center mt-4">
+          <div
+            v-for="(asset, index) in uploadedAssets"
+            :key="index"
+            class="m-2"
+          >
+            <img
+              :src="asset.secure_url"
+              :alt="asset.public_id"
+              class="w-64 h-64 rounded shadow-lg"
+            />
+            <p class="text-white mt-2 text-center">{{ asset.public_id }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <table class="max-w-3xl mx-auto mt-2">
+  <!-- <table class="max-w-3xl mx-auto mt-2">
     <thead>
       <tr>
         <th class="text-left py-3 px-4">Public ID</th>
@@ -36,7 +64,7 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
 </template>
 
 <script>
@@ -50,7 +78,7 @@ export default {
   },
   methods: {
     openCloudinaryWidget() {
-      cloudinary
+      const widget = cloudinary
         .createUploadWidget(
           {
             cloudName: 'brad-dev',
@@ -58,6 +86,9 @@ export default {
             uploadPreset: 'ugc-demo',
             multiple: true,
             sources: ['local', 'url', 'camera'],
+            resourceType: 'image',
+            maxFiles: 10,
+            maxFilsize: 10485760,
           },
           (error, result) => {
             if (!error && result && result.event === 'success') {
@@ -67,13 +98,16 @@ export default {
                 folder: result.info.folder,
                 format: result.info.format,
                 secure_url: result.info.secure_url,
+                thumbnail_url: result.info.thumbnail_url,
               });
+              // widget.close({ quiet: true });
             } else if (error) {
               console.error('Upload Error:', error);
             }
           },
         )
         .open();
+      // .close();
     },
   },
 };
