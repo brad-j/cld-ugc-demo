@@ -7,6 +7,7 @@
       >
         Upload Assets
       </button>
+
       <div class="flex flex-col items-center min-h-screen">
         <div v-if="uploadedAssets.length > 0" class="mt-8 w-full">
           <h3 class="text-xl text-center tracking-wider uppercase">
@@ -39,6 +40,7 @@ export default {
   data() {
     return {
       uploadedAssets: [],
+      dragging: false, // Add this line
     };
   },
   methods: {
@@ -74,8 +76,15 @@ export default {
           },
         )
         .open();
-      // .close();
+      if (files) {
+        setTimeout(() => {
+          for (let i = 0; i < files.length; i++) {
+            sendFile(files[i]);
+          }
+        }, 1000); // Adjust the delay as needed
+      }
     },
+
     generateThumbnailUrl(secureUrl) {
       const transformation = 'w_300,h_300,c_fill,ar_1:1';
       const urlParts = secureUrl.split('/');
@@ -87,9 +96,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap');
 .semi-bold {
   font-weight: 600;
+}
+/* Override default Cloudinary widget styles */
+.cloudinary-widget .drag-area {
+  background-color: #2d3748 !important;
+  border: 2px dashed #319795 !important;
+}
+
+.cloudinary-widget .drag-area:hover {
+  background-color: #2c5282 !important;
+  border-color: #48bb78 !important;
 }
 </style>
