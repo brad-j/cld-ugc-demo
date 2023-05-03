@@ -21,7 +21,7 @@
     <thead>
       <tr>
         <th class="text-left py-3 px-4">Public ID</th>
-        <th class="text-left py-3 px-4">Folder</th>
+        <th class="text-left py-3 px-4">Format</th>
         <th class="text-left py-3 px-4">URL</th>
       </tr>
     </thead>
