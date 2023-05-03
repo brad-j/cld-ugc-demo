@@ -21,9 +21,9 @@
     <div class="flex flex-col items-center min-h-screen bg-neutral-900">
       <button
         @click="openCloudinaryWidget"
-        class="bg-blue-500 text-white py-2 px-4 rounded mt-8"
+        class="bg-cyan-700 text-white py-2 uppercase px-4 rounded mt-8 transform transition duration-300 hover:bg-cyan-600 hover:scale-110 active:scale-95 focus:outline-none"
       >
-        Upload Image
+        Upload Assets
       </button>
       <div v-if="uploadedAssets.length > 0" class="mt-8 w-full">
         <h3 class="text-white text-center">Uploaded Assets:</h3>
