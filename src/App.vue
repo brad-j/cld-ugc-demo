@@ -13,7 +13,7 @@ export default {
     class="bg-gradient-to-b from-neutral-950 to-neutral-800 text-white font h-screen"
   >
     <h1
-      class="text-4xl tracking-wide uppercase font-siemibold py-6 text-center"
+      class="text-4xl tracking-wide uppercase font-siemibold py-6 text-center border-b-2 border-neutral-600"
     >
       Cloudinary UGC Demo
     </h1>
