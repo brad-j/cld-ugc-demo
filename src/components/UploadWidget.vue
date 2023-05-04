@@ -67,6 +67,20 @@ export default {
             resourceType: 'image',
             maxFiles: 10,
             maxFilsize: 10485760,
+            styles: {
+              palette: {
+                window: '#0a0a0a',
+                windowBorder: '#57534e',
+                link: '#0e7490',
+                action: '#0e7490',
+                tabIcon: '#22d3ee',
+                inactiveTabIcon: '#a1a1aa',
+                sourceBg: '#262626',
+              },
+              frame: {
+                background: '#26262699',
+              },
+            },
           },
           (error, result) => {
             if (!error && result && result.event === 'success') {
