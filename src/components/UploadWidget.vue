@@ -8,6 +8,14 @@
         Upload Assets
       </button>
 
+      <ul
+        class="text-neutral-400 text-sm mt-3 bg-neutral-950 px-3 py-2 rounded"
+      >
+        <li><span class="font-bold">Max file size:</span> 3mb</li>
+        <li><span class="font-bold">Max files:</span> 10</li>
+        <li><span class="font-bold">Allowed formats:</span> jpg, png, gif</li>
+      </ul>
+
       <div class="flex flex-col items-center min-h-screen">
         <div v-if="uploadedAssets.length > 0" class="mt-8 w-full">
           <h3 class="text-xl text-center tracking-wider uppercase">
@@ -21,12 +29,14 @@
               :key="index"
               class="m-2"
             >
-              <img
-                :src="asset.thumbnail_url"
-                :alt="asset.public_id"
-                class="w-full h-auto rounded shadow-lg"
-              />
-              <p class="text-white mt-2 text-center">{{ asset.public_id }}</p>
+              <a :href="asset.optimized_url" target="_blank">
+                <img
+                  :src="asset.thumbnail_url"
+                  :alt="asset.public_id"
+                  class="w-full h-auto rounded shadow-lg"
+                />
+                <p class="text-white mt-2 text-center">{{ asset.public_id }}</p>
+              </a>
             </div>
           </div>
         </div>
@@ -68,8 +78,10 @@ export default {
                 thumbnail_url: this.generateThumbnailUrl(
                   result.info.secure_url,
                 ),
+                optimized_url: this.generateOptimizedImage(
+                  result.info.secure_url,
+                ),
               });
-              // widget.close({ quiet: true });
             } else if (error) {
               console.error('Upload Error:', error);
             }
@@ -87,6 +99,13 @@ export default {
 
     generateThumbnailUrl(secureUrl) {
       const transformation = 'w_300,h_300,c_fill,ar_1:1';
+      const urlParts = secureUrl.split('/');
+      urlParts.splice(-2, 0, transformation);
+
+      return urlParts.join('/');
+    },
+    generateOptimizedImage(secureUrl) {
+      const transformation = 'q_auto,f_auto';
       const urlParts = secureUrl.split('/');
       urlParts.splice(-2, 0, transformation);
 
