@@ -1,11 +1,9 @@
 <script>
 import UploadWidget from './components/UploadWidget.vue';
-import SearchComponent from './components/SearchComponent.vue';
 export default {
   name: 'App',
   components: {
     UploadWidget: UploadWidget,
-    SearchComponent: SearchComponent,
   },
 };
 </script>
