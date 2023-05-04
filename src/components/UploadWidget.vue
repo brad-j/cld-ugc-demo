@@ -51,7 +51,6 @@ export default {
   data() {
     return {
       uploadedAssets: [],
-      dragging: false, // Add this line
     };
   },
   methods: {
@@ -60,7 +59,7 @@ export default {
         .createUploadWidget(
           {
             cloudName: 'brad-dev',
-            apiKey: '216731652951429',
+            apiKey: import.meta.env.VITE_CLOUDINARY_API_KEY,
             uploadPreset: 'ugc-demo',
             multiple: true,
             sources: ['local', 'url', 'camera'],
@@ -103,15 +102,7 @@ export default {
           },
         )
         .open();
-      if (files) {
-        setTimeout(() => {
-          for (let i = 0; i < files.length; i++) {
-            sendFile(files[i]);
-          }
-        }, 1000); // Adjust the delay as needed
-      }
     },
-
     generateThumbnailUrl(secureUrl) {
       const transformation = 'w_300,h_300,c_fill,ar_1:1';
       const urlParts = secureUrl.split('/');

@@ -4,6 +4,9 @@ dependencies:
   cloudinary:
     specifier: ^1.36.4
     version: 1.36.4
+  cloudinary-core:
+    specifier: ^2.13.0
+    version: 2.13.0(lodash@4.17.21)
   vue:
     specifier: ^3.2.47
     version: 3.2.47
