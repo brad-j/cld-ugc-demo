@@ -9,6 +9,7 @@
       </button>
 
       <ul
+        v-if="!uploadedAssets.length > 0"
         class="text-neutral-400 text-sm mt-3 bg-neutral-950 px-3 py-2 rounded"
       >
         <li><span class="font-bold">Max file size:</span> 3mb</li>

@@ -18,13 +18,7 @@ export default {
       Cloudinary UGC Demo
     </h1>
 
-    <div>
-      <UploadWidget />
-    </div>
-
-    <div>
-      <img id="uploadedimage" src="" />
-    </div>
+    <UploadWidget />
   </div>
 </template>
 
