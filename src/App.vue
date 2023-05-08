@@ -17,7 +17,7 @@ export default {
     >
       Cloudinary UGC Demo
     </h1>
-    <SearchComponent />
+    <Search />
 
     <UploadWidget />
   </div>

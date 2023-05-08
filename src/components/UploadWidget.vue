@@ -30,9 +30,9 @@
               :key="index"
               class="m-2"
             >
-              <a :href="asset.optimized_url" target="_blank">
+              <a :href="asset.secure_url" target="_blank">
                 <img
-                  :src="asset.thumbnail_url"
+                  :src="asset.secure_url"
                   :alt="asset.public_id"
                   class="w-full h-auto rounded shadow-lg"
                 />
@@ -55,11 +55,11 @@ export default {
   },
   methods: {
     openCloudinaryWidget() {
-      const widget = cloudinary
+      cloudinary
         .createUploadWidget(
           {
-            cloudName: 'brad-dev',
-            apiKey: import.meta.env.VITE_CLOUDINARY_API_KEY,
+            cloudName: 'brad-demo',
+            apiKey: 'import.meta.env.VITE_CLOUDINARY_API_KEY',
             uploadPreset: 'ugc-demo',
             multiple: true,
             sources: ['local', 'url', 'camera'],
@@ -92,9 +92,6 @@ export default {
                 thumbnail_url: this.generateThumbnailUrl(
                   result.info.secure_url,
                 ),
-                optimized_url: this.generateOptimizedImage(
-                  result.info.secure_url,
-                ),
               });
             } else if (error) {
               console.error('Upload Error:', error);
@@ -110,13 +107,6 @@ export default {
 
       return urlParts.join('/');
     },
-    generateOptimizedImage(secureUrl) {
-      const transformation = 'q_auto,f_auto';
-      const urlParts = secureUrl.split('/');
-      urlParts.splice(-2, 0, transformation);
-
-      return urlParts.join('/');
-    },
   },
 };
 </script>
@@ -126,14 +116,7 @@ export default {
 .semi-bold {
   font-weight: 600;
 }
-/* Override default Cloudinary widget styles */
-.cloudinary-widget .drag-area {
-  background-color: #2d3748 !important;
-  border: 2px dashed #319795 !important;
-}
-
-.cloudinary-widget .drag-area:hover {
-  background-color: #2c5282 !important;
-  border-color: #48bb78 !important;
+.font {
+  font-family: 'Inter', sans-serif;
 }
 </style>
